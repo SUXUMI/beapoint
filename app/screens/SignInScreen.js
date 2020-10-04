@@ -27,10 +27,7 @@ function SignInScreen({ navigation }) {
   const { user, setUser } = useContext(AuthContext);
 
   const [errors, setErrors] = useState({ email: "", password: "" });
-  const [values, setValues] = useState({
-    email: "test1@admin.ge",
-    password: "12345",
-  });
+  const [values, setValues] = useState({ email: "", password: "" });
   const [touched, setTouched] = useState({ email: false, password: false });
   const [userDataFetching, setUserDataFetching] = useState(false);
   const [showPasswordEntry, setShowPasswordEntry] = useState(false);
