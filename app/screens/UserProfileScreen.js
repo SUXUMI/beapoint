@@ -25,7 +25,7 @@ function UserProfileScreen(props) {
   return (
     <AuthScreen>
       <View style={styles.container}>
-        <Image style={styles.image} source={require("../assets/i/happy-guys.png")} />
+        <Image style={styles.image} source={{ uri: user.picture }} />
         {/* 
         <Text style={styles.textGreetings} category="h4">
           Welcome {user && user["nickname"]}

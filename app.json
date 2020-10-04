@@ -5,7 +5,7 @@
     "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./app/assets/i/icon.png",
-    "privacy": "unlisted",
+    "privacy": "public",
     "splash": {
       "image": "./app/assets/i/splash.png",
       "resizeMode": "cover",
@@ -14,7 +14,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
