@@ -5,6 +5,7 @@ import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { default as theme } from "./app/config/eva-custom-theme.json";
 import { NavigationContainer } from "@react-navigation/native";
+import { AppLoading } from "expo";
 
 import authApi from "./app/api/auth";
 import AppNavigator from "./app/navigation/AppNavigator";
@@ -14,6 +15,7 @@ import authStorage from "./app/auth/storage";
 
 export default function App() {
   const [user, setUser] = useState();
+  const [appLoaded, setAppLoaded] = useState(false);
 
   const restoreUser = async () => {
     // get token from storage
@@ -32,9 +34,21 @@ export default function App() {
     setUser(result.data);
   };
 
-  useEffect(() => {
-    restoreUser();
-  }, []);
+  if (!appLoaded) {
+    return (
+      <AppLoading
+        // !if this is not defined, app stops on a splash screen!
+        startAsync={restoreUser}
+        onFinish={() => setAppLoaded(true)}
+        onError={console.warn}
+      />
+    );
+  }
+
+  // not works within <AppLoading />
+  // causes error: `Component Exception` >> `Rendered fewer hooks that expected.
+  // This may be caused by an accidental early return statement.`
+  // useEffect(() => { restoreUser();  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

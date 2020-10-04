@@ -7,7 +7,7 @@ function AppNavigator(props) {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator initialRouteName="SignIn" screenOptions={{ headerShown: true }}>
+    <Stack.Navigator initialRouteName="SignIn" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="SignInWelcome" component={SignInWelcomeScreen} options={{ title: "Welcome" }}></Stack.Screen>
     </Stack.Navigator>
   );
