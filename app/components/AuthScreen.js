@@ -8,7 +8,7 @@ function AuthScreen({ children }) {
     <Screen style={styles.container}>
       <View style={styles.logo_container}>
         <Image
-          source={require("../assets/logos/401x103-transp-padd.png")}
+          source={require("../assets/i/logos/401x103-transp-padd.png")}
           style={styles.logo}
         ></Image>
       </View>

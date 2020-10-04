@@ -23,7 +23,7 @@ const validationSchema = object().shape({
 //   password: Joi.string().required(),
 // });
 
-function SignInScreen(props) {
+function SignInScreen({ navigation }) {
   const { user, setUser } = useContext(AuthContext);
 
   const [errors, setErrors] = useState({ email: "", password: "" });
@@ -135,6 +135,8 @@ function SignInScreen(props) {
     setLoginFailed(false);
 
     setUser(result.data);
+
+    navigation.navigate("SignInWelcome");
   };
 
   return (

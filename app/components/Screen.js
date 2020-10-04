@@ -14,7 +14,7 @@ function Screen({ children, style }) {
     <ImageBackground
       style={[styles.container, style]}
       source={
-        style && !style.backgroundColor ? require("../assets/bg.png") : null
+        style && !style.backgroundColor ? require("../assets/i/bg.png") : null
       }
       resizeMode="stretch"
     >

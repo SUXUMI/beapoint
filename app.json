@@ -4,11 +4,10 @@
     "slug": "beapoint-expo",
     "version": "1.0.5",
     "orientation": "portrait",
-    "icon": "./app/assets/icon.png",
+    "icon": "./app/assets/i/icon.png",
     "privacy": "unlisted",
     "splash": {
-      // https://docs.expo.io/guides/splash-screens/
-      "image": "./app/assets/splash.png",
+      "image": "./app/assets/i/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#8076fb"
     },
@@ -20,7 +19,7 @@
       "supportsTablet": true
     },
     "web": {
-      "favicon": "./app/assets/favicon.png"
+      "favicon": "./app/assets/i/favicon.png"
     },
     "description": ""
   }
