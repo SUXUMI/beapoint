@@ -136,7 +136,7 @@ function SignInScreen({ navigation }) {
 
     setUser(result.data);
 
-    navigation.navigate("SignInWelcome");
+    // navigation.navigate("SignInWelcome");
   };
 
   return (
@@ -149,10 +149,7 @@ function SignInScreen({ navigation }) {
         autoCorrect={false}
         // autoFocus={true}
         caption={(evaProps) => (
-          <Text
-            {...evaProps}
-            style={[evaProps.style, { color: colors.danger }]}
-          >
+          <Text {...evaProps} style={[evaProps.style, { color: colors.danger }]}>
             {touched.email && errors.email}
           </Text>
         )}
@@ -175,10 +172,7 @@ function SignInScreen({ navigation }) {
         accessoryRight={renderPasswordEntrySwitherIcon}
         // caption="Should contain at least 8 symbols"
         caption={(evaProps) => (
-          <Text
-            {...evaProps}
-            style={[evaProps.style, { color: colors.danger }]}
-          >
+          <Text {...evaProps} style={[evaProps.style, { color: colors.danger }]}>
             {touched.password && errors.password}
           </Text>
         )}
@@ -208,30 +202,12 @@ function SignInScreen({ navigation }) {
       </Text>
 
       <View style={styles.socialButtonsContainer}>
-        <Button
-          onPress={() => {}}
-          size="giant"
-          style={styles.socialButton}
-          appearance="outline"
-        >
-          <Icon
-            name="facebook"
-            style={styles.socialButtonIcon}
-            fill={colors.primary}
-          />
+        <Button onPress={() => {}} size="giant" style={styles.socialButton} appearance="outline">
+          <Icon name="facebook" style={styles.socialButtonIcon} fill={colors.primary} />
         </Button>
         <Divider style={styles.socialDivider} />
-        <Button
-          onPress={() => {}}
-          size="giant"
-          style={styles.socialButton}
-          appearance="outline"
-        >
-          <Icon
-            name="google"
-            style={styles.socialButtonIcon}
-            fill={colors.primary}
-          />
+        <Button onPress={() => {}} size="giant" style={styles.socialButton} appearance="outline">
+          <Icon name="google" style={styles.socialButtonIcon} fill={colors.primary} />
         </Button>
       </View>
 

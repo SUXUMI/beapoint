@@ -1,5 +1,6 @@
 import apiClient from "./client";
 import settings from "../config/settings";
+import authStorage from "../auth/storage";
 
 const endPoints = {
   authToken: "/oauth/token",
@@ -31,8 +32,19 @@ const login = async (username, password) => {
 
   const access_token = result.data.access_token;
 
+  // store user token
+  if (authStorage.isAvailable()) {
+    authStorage.setToken(access_token);
+  }
+
   // get user info
-  result = await getUserInfo(access_token);
+  result = loginWithAccessToken(access_token);
+
+  return result;
+};
+
+const loginWithAccessToken = async (access_token) => {
+  const result = await getUserInfo(access_token);
 
   return result;
 };
@@ -54,4 +66,4 @@ const getUserInfo = (access_token) => {
 
 const createUser = (username, password) => {};
 
-export default { login, createUser };
+export default { createUser, login, loginWithAccessToken };
