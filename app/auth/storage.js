@@ -34,4 +34,4 @@ const deleteToken = async () => {
   }
 };
 
-export default { isAvailable, getToken, setToken, deleteToken };
+export default { deleteToken, getToken, isAvailable, setToken };

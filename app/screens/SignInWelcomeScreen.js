@@ -1,12 +1,12 @@
 import { Text } from "@ui-kitten/components";
-import React, { useContext } from "react";
+import React from "react";
 import { Image, StyleSheet } from "react-native";
-import AuthContext from "../auth/context";
 
 import AuthScreen from "../components/AuthScreen";
+import useAuth from "../auth/useAuth";
 
-function SignInWelcomeScreen(props) {
-  const { user } = useContext(AuthContext);
+function SignInWelcomeScreen({ navigation, ...otherProps }) {
+  const { user } = useAuth();
 
   // DEBUG
   //   const user = {
@@ -20,12 +20,14 @@ function SignInWelcomeScreen(props) {
   //     updated_at: "2020-10-04T12:25:01.239Z",
   //   };
 
+  setTimeout(function () {
+    // navigation.navigate("UserProfile");
+    navigation.replace("UserProfile");
+  }, 500);
+
   return (
     <AuthScreen style={styles.container}>
-      <Image
-        style={styles.image}
-        source={require("../assets/i/happy-guys.png")}
-      />
+      <Image style={styles.image} source={require("../assets/i/happy-guys.png")} />
       <Text style={styles.textGreetings} category="h4">
         Welcome {user && user["nickname"]}
       </Text>

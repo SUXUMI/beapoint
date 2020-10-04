@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Alert, StyleSheet, TouchableOpacity, View } from "react-native";
-import { Button, Divider, Icon, Input, Text } from "@ui-kitten/components";
+import { Button, Divider, Icon, Input, Spinner, Text } from "@ui-kitten/components";
 import { string, object, reach } from "yup";
 // import Joi from "joi";
 // import "text-encoding-polyfill";
@@ -32,7 +32,7 @@ function SignInScreen({ navigation }) {
     password: "12345",
   });
   const [touched, setTouched] = useState({ email: false, password: false });
-  const [loginFailed, setLoginFailed] = useState(false);
+  const [userDataFetching, setUserDataFetching] = useState(false);
   const [showPasswordEntry, setShowPasswordEntry] = useState(false);
 
   const touchedHandler = (field) => setTouched({ ...touched, [field]: true });
@@ -119,20 +119,16 @@ function SignInScreen({ navigation }) {
     // check if IS VALID
     if (!(await validationHandler())) return;
 
-    // ?question: not working, why?
-    // const [email, password] = values;
+    setUserDataFetching(true);
 
     // handle login API call
     const result = await authApi.login(values.email, values.password);
 
-    console.log("\n\n\n=====================>>> result:", result.data);
+    setUserDataFetching(false);
 
-    if (!result.ok) {
-      Alert.alert("Authorization Error", result.data.error_description);
-      return setLoginFailed(true);
-    }
+    console.log("\n\n\nUSER DATA:", result.data);
 
-    setLoginFailed(false);
+    if (!result.ok) return Alert.alert("Authorization Error", result.data.error_description);
 
     setUser(result.data);
 
@@ -187,14 +183,24 @@ function SignInScreen({ navigation }) {
         value={values.password}
       />
 
-      <TouchableOpacity>
-        <Text style={styles.textForgot} status="primary">
-          Forgot password?
-        </Text>
-      </TouchableOpacity>
+      <View style={{ flexDirection: "row", justifyContent: "flex-end", marginBottom: "3%" }}>
+        <TouchableOpacity>
+          <Text style={styles.textForgot} status="primary">
+            Forgot password?
+          </Text>
+        </TouchableOpacity>
+      </View>
 
       <Button style={styles.submitButton} onPress={handleSignIn}>
+        <View style={{ marginRight: 10, opacity: userDataFetching ? 1 : 0 }}>
+          {/* margin/padding not works with spinner */}
+          <Spinner size="tiny" status="basic" />
+        </View>
         Sign In
+        {/* just for symmetry */}
+        <View style={{ marginLeft: 10, opacity: 0 }}>
+          <Spinner size="tiny" status="warning" />
+        </View>
       </Button>
 
       <Text style={styles.textSocialMedia} appearance="hint">

@@ -3,14 +3,11 @@ import { StyleSheet, View, Image } from "react-native";
 import Screen from "./Screen";
 import colors from "../config/colors";
 
-function AuthScreen({ children }) {
+function AuthScreen({ children, style }) {
   return (
-    <Screen style={styles.container}>
+    <Screen style={[styles.container, style]}>
       <View style={styles.logo_container}>
-        <Image
-          source={require("../assets/i/logos/401x103-transp-padd.png")}
-          style={styles.logo}
-        ></Image>
+        <Image source={require("../assets/i/logos/401x103-transp-padd.png")} style={styles.logo}></Image>
       </View>
       <View style={styles.form_container}>
         <View style={styles.form_sub_container}>{children}</View>

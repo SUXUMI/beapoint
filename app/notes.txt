@@ -1,0 +1,23 @@
+issues
+    2020.10.04
+    sometimes appears the warning message:
+    `[Unhandled promise rejection: Error: Native splash screen is already hidden. Call this method before rendering any view.]`
+
+    `borderStyle: "dashed",` >> reises error on <Image /> despite documentation https://reactnative.dev/docs/view-style-props#borderstyle
+    `borderStyle: "dotted",` >> reises error on <Image /> BUT draws "dotted" style
+        Warning: Failed prop type: Invalid props.style key `borderStyle` supplied to `Image`.
+
+QUESTIONS
+    how about localization???
+
+    statless function VS classes??
+
+    onBlur / onFocus - not works! Why?
+
+    what to do when keyboard pops up?
+    
+    `changeHandler` console.log(values) are still in previous state?
+        re-rendering time, useState is async AND without the promise! (no await!!!)
+    
+    navigation header image background?
+

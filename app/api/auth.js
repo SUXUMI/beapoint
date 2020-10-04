@@ -49,21 +49,42 @@ const loginWithAccessToken = async (access_token) => {
   return result;
 };
 
-const getUserInfo = (access_token) => {
+const getUserInfo = async (access_token) => {
   // NOT WORKS!!!!!
   // await apiClient.addAsyncRequestTransform(async (request) => {
   //   request["authorization"] = "Bearer " + access_token;
   // });
 
-  apiClient.setHeader("authorization", "Bearer " + access_token);
+  await apiClient.setHeader("authorization", "Bearer " + access_token);
 
-  return apiClient.get("/userinfo", {
+  return await apiClient.get("/userinfo", {
     client_id,
     // client_secret: clientSecret,
     // access_token,
   });
 };
 
+/**
+ * Tries to restore user from the existing access_tocken saved in storage,
+ * otherwise deletes the stored expired access_token
+ */
+const restoreUser = async () => {
+  // get token from storage
+  const access_token = await authStorage.getToken();
+
+  if (!access_token) return;
+
+  // try to login with auth token
+  const result = await loginWithAccessToken(access_token);
+
+  if (!result.ok) {
+    // delete stored old access_token
+    await authStorage.deleteToken();
+  }
+
+  return result;
+};
+
 const createUser = (username, password) => {};
 
-export default { createUser, login, loginWithAccessToken };
+export default { createUser, login, loginWithAccessToken, restoreUser };

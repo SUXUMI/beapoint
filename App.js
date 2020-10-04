@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import * as eva from "@eva-design/eva";
 import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
@@ -11,26 +11,15 @@ import authApi from "./app/api/auth";
 import AppNavigator from "./app/navigation/AppNavigator";
 import AuthContext from "./app/auth/context";
 import AuthNavigator from "./app/navigation/AuthNavigator";
-import authStorage from "./app/auth/storage";
+import UserProfileScreen from "./app/screens/UserProfileScreen";
 
 export default function App() {
   const [user, setUser] = useState();
   const [appLoaded, setAppLoaded] = useState(false);
 
   const restoreUser = async () => {
-    // get token from storage
-    const access_token = await authStorage.getToken();
-
-    if (!access_token) return;
-
-    // try to login with auth token
-    const result = await authApi.loginWithAccessToken(access_token);
-
-    if (!result.ok) {
-      // delete stored old access_token
-      await authStorage.deleteToken();
-    }
-
+    const result = await authApi.restoreUser();
+    if (!result || !result.ok) return;
     setUser(result.data);
   };
 
@@ -49,6 +38,8 @@ export default function App() {
   // causes error: `Component Exception` >> `Rendered fewer hooks that expected.
   // This may be caused by an accidental early return statement.`
   // useEffect(() => { restoreUser();  }, []);
+
+  // return <UserProfileScreen />;
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
