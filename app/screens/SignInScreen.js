@@ -28,7 +28,7 @@ function SignInScreen(props) {
 
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [values, setValues] = useState({
-    email: "test4@admin.ge",
+    email: "test1@admin.ge",
     password: "12345",
   });
   const [touched, setTouched] = useState({ email: false, password: false });
